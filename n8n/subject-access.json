@@ -1,0 +1,68 @@
+{
+  "name": "Subject Access Export",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        160,
+        280
+      ],
+      "webhookId": "subject-access"
+    },
+    {
+      "parameters": {
+        "url": "http://pii_api:4000/export",
+        "options": {}
+      },
+      "name": "HTTP Export",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        460,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "no-reply@lexinav.local",
+        "toEmail": "={{$json.email}}",
+        "subject": "Your data export",
+        "text": "Attached is your export. (MVP placeholder)"
+      },
+      "name": "Email User",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        760,
+        280
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Export",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Export": {
+      "main": [
+        [
+          {
+            "node": "Email User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

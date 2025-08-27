@@ -1,0 +1,75 @@
+{
+  "name": "Retention Cleanup (cron)",
+  "nodes": [
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "hour": 3
+            }
+          ]
+        }
+      },
+      "name": "Cron",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        160,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://pii_api:4000/retention/cleanup",
+        "options": {}
+      },
+      "name": "HTTP Cleanup",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        460,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "no-reply@lexinav.local",
+        "toEmail": "inbox@lexinav.local",
+        "subject": "Retention cleanup done",
+        "text": "Cleanup completed."
+      },
+      "name": "Email Ops",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        760,
+        280
+      ]
+    }
+  ],
+  "connections": {
+    "Cron": {
+      "main": [
+        [
+          {
+            "node": "HTTP Cleanup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Cleanup": {
+      "main": [
+        [
+          {
+            "node": "Email Ops",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

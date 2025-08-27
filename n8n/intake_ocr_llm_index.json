@@ -1,0 +1,122 @@
+{
+  "name": "Document Intake \u2192 OCR \u2192 Summarize \u2192 Index",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Webhook Upload",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        120,
+        220
+      ],
+      "webhookId": "intake-upload"
+    },
+    {
+      "parameters": {
+        "url": "http://tika:9998/tika",
+        "options": {
+          "method": "POST"
+        }
+      },
+      "name": "HTTP OCR/Tika",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        380,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://ollama:11434/api/generate",
+        "options": {
+          "bodyContentType": "json"
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\"model\":\"llama3.1\",\"prompt\":\"Summarize this NAV letter in plain Norwegian with deadlines and actions:\\n\\n\" + $json[\"data\"]}"
+      },
+      "name": "HTTP LLM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        660,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://meili:7700/indexes/docs/documents",
+        "options": {}
+      },
+      "name": "HTTP Index",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        940,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "no-reply@lexinav.local",
+        "toEmail": "inbox@lexinav.local",
+        "subject": "New doc processed",
+        "text": "Doc summarized & indexed."
+      },
+      "name": "Email Notify",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        220
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Upload": {
+      "main": [
+        [
+          {
+            "node": "HTTP OCR/Tika",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP OCR/Tika": {
+      "main": [
+        [
+          {
+            "node": "HTTP LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP LLM": {
+      "main": [
+        [
+          {
+            "node": "HTTP Index",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Index": {
+      "main": [
+        [
+          {
+            "node": "Email Notify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

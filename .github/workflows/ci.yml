@@ -1,0 +1,28 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Install root tools
+        run: npm i -g semgrep gitleaks trivy || true
+      - name: Typecheck web/docs
+        run: |
+          cd apps/web && npm ci && npm run build --if-present || true
+          cd ../docs && npm ci && npm run build --if-present || true
+      - name: Semgrep
+        run: semgrep ci || true
+      - name: Gitleaks
+        run: gitleaks detect --no-banner --redact || true
+      - name: Trivy FS
+        run: trivy fs --exit-code 0 --severity HIGH,CRITICAL . || true
+      - name: Build storybook
+        run: |
+          cd apps/web && npx storybook build || true

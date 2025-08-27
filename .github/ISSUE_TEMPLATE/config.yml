@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Dokumentasjon
+    url: https://lexinav.no/docs
+    about: Sjekk dokumentasjonen før du oppretter et issue.
+  - name: 💬 Diskusjon / idé
+    url: https://github.com/lexinav/discussions
+    about: Bruk diskusjonsforumet for åpne idéer.
