@@ -1,10 +1,3 @@
-Supert 🙌 Her er et forslag til en **GitHub-vennlig `README.md`** du kan legge i rotmappa. Den er orientert mot utviklere/opensource-miljøet (ikke investorer), og forklarer hva LexiNAV er, hvordan man kjører det, og hvor man finner docs.
-
----
-
-# 📄 `README.md` (for GitHub)
-
-```markdown
 # LexiNAV — NAV gjort menneskelig
 
 LexiNAV er en åpen plattform som gjør NAV-systemet forståelig og tilgjengelig.  
@@ -127,4 +120,6 @@ MIT License – se [`LICENSE`](https://chatgpt.com/g/g-p-68af13dc28f88191bd022cf
 
 ---
 
-LexiNAV er et **Project-FareWell** initiativ 🌍
+🏛️ For Demokrati | 🤝 For Fellesskap | 🌟 For Alle
+
+© 2025 LexiNAV Fellesskap & Utviklingsteam. Alle rettigheter forbeholdt.
