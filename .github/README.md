@@ -1,5 +1,14 @@
 # LexiNAV — NAV gjort menneskelig
 
+[![CI](https://github.com/SeasonedAsh/Project-FareWell/actions/workflows/ci.yml/badge.svg)](https://github.com/SeasonedAsh/Project-FareWell/actions/workflows/ci.yml)
+[![Storybook Pages](https://github.com/SeasonedAsh/Project-FareWell/actions/workflows/storybook-pages.yml/badge.svg)](https://github.com/SeasonedAsh/Project-FareWell/actions/workflows/storybook-pages.yml)
+[![Release](https://img.shields.io/github/v/release/SeasonedAsh/Project-FareWell?display_name=tag)](https://github.com/SeasonedAsh/Project-FareWell/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Sponsor](https://img.shields.io/badge/Sponsor-❤-black?logo=github-sponsors)](https://github.com/sponsors/lexinav)
+[![Open Issues](https://img.shields.io/github/issues/SeasonedAsh/Project-FareWell)](https://github.com/SeasonedAsh/Project-FareWell/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](.github/pull_request_template.md)
+
+
 LexiNAV er en åpen plattform som gjør NAV-systemet forståelig og tilgjengelig.  
 Borgeren kan laste opp brev, få en forklaring på plikter og rettigheter, og bygge en klage på minutter.  
 Prosjektet er bygd for å være **gjennomsiktig, GDPR-kompatibelt og uten vendor lock-in**.
@@ -30,6 +39,8 @@ Prosjektet er bygd for å være **gjennomsiktig, GDPR-kompatibelt og uten vendor
 - **Infra:** Docker Compose (Postgres, Directus, n8n, MinIO, PII-API)  
 
 ---
+
+🔎 **Design system / Storybook:** https://seasonedash.github.io/Project-FareWell/
 
 ## 🚀 Kom i gang (lokalt)
 ```bash
